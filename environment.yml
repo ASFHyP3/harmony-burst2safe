@@ -1,0 +1,18 @@
+name: harmony-burst2safe
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python<3.12
+  - pip
+  - gdal
+  - numpy
+  - pytest
+  - pytest-cov
+  - setuptools_scm
+  - shapely
+  - pystac
+  - asf_search
+  - burst2safe>=1.3.0
+  - pip:
+      - harmony-service-lib

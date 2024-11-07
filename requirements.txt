@@ -1,0 +1,11 @@
+# duplicated in environment.yml
+gdal[numpy]
+harmony-service-lib
+numpy
+pystac
+pytest
+pytest-cov
+setuptools_scm
+shapely
+asf_search
+burst2safe>=1.3.0

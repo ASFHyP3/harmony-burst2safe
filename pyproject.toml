@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61.0", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "harmony_burst2safe"
+requires-python = ">=3.11,<3.12"
+authors = [
+    {name="tools-bot", email="UAF-asf-apd@alaska.edu"},
+]
+description = "A tool for creating custom Sentinel-1 SLCs from burst data"
+license = {text = "BSD-3-Clause"}
+classifiers=[
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+]
+
+dynamic = ["version", "readme", "dependencies", "optional-dependencies"]
+
+[project.urls]
+Homepage = "harmony-burst2safe"
+Documentation = "https://github.com/asfhyp3/harmony-burst2safe#harmony-burst2safe"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+script_launch_mode = "subprocess"
+
+[tool.setuptools]
+include-package-data = true
+zip-safe = false
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md"], content-type = "text/markdown"}
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools_scm]
