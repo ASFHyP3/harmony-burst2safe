@@ -25,7 +25,8 @@ class Burst:
     swath: str
     polarization: str
     index: int
-    datetime: datetime
+    start_datetime: datetime
+    end_datetime: datetime
     footprint: Polygon
     bbox: Iterable[int]
     data_url: str
@@ -49,7 +50,8 @@ def parse_search_result(search_result):
         swath=swath.upper(),
         polarization=polarization.upper(),
         index=int(index),
-        datetime=datetime.strptime(search_result.properties['stopTime'], '%Y-%m-%dT%H:%M:%SZ'),
+        start_datetime=datetime.strptime(search_result.properties['startTime'], '%Y-%m-%dT%H:%M:%SZ'),
+        end_datetime=datetime.strptime(search_result.properties['stopTime'], '%Y-%m-%dT%H:%M:%SZ'),
         footprint=polygon,
         bbox=polygon.bounds,
         data_url=search_result.properties['url'],
@@ -75,7 +77,9 @@ def search_results_to_items(search_results):
             id=f'SLC-{orbit}',
             geometry=mapping(full_footprint),
             bbox=full_footprint.bounds,
-            datetime=min([burst.datetime for burst in slc_group]),
+            datetime=min([burst.start_datetime for burst in slc_group]),
+            start_datetime=min([burst.start_datetime for burst in slc_group]),
+            end_datetime=max([burst.end_datetime for burst in slc_group]),
             properties={
                 'orbit': slc_group[0].orbit,
                 'flight_direction': slc_group[0].flight_direction,
